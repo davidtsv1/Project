@@ -1,0 +1,11 @@
+{
+  "transactions": [
+    {
+      "date": "2026-06-07 11:34",
+      "type": "income",
+      "amount": 500.0,
+      "description": "\"add\""
+    }
+  ],
+  "balance": 500.0
+}

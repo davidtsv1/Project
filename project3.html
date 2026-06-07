@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Calculator</title>
+  <style>
+    body {
+      background: #d0d0d0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+    }
+
+    .calc {
+      background: #c0c0c0;
+      border: 3px solid #888;
+      padding: 16px;
+      width: 220px;
+    }
+
+    #screen {
+      width: 100%;
+      font-size: 22px;
+      text-align: right;
+      padding: 6px;
+      background: #d4edba;
+      border: 2px inset #aaa;
+      margin-bottom: 12px;
+      box-sizing: border-box;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 5px;
+    }
+
+    button {
+      padding: 12px;
+      font-size: 16px;
+      background: #b0b0b0;
+      border: 2px outset #ccc;
+      cursor: pointer;
+    }
+
+    button:active {
+      border-style: inset;
+    }
+
+    .op  { background: #a0a8c0; }
+    .clr { background: #c0a0a0; }
+    .eq  { background: #a0c0a0; grid-column: span 2; }
+  </style>
+</head>
+<body>
+<div class="calc">
+  <input id="screen" type="text" readonly value="0" />
+  <div class="buttons">
+    <button class="clr" onclick="ac()">AC</button>
+    <button onclick="del()">DEL</button>
+    <button class="op" onclick="press('%')">%</button>
+    <button class="op" onclick="press('/')">÷</button>
+
+    <button onclick="press('7')">7</button>
+    <button onclick="press('8')">8</button>
+    <button onclick="press('9')">9</button>
+    <button class="op" onclick="press('*')">×</button>
+
+    <button onclick="press('4')">4</button>
+    <button onclick="press('5')">5</button>
+    <button onclick="press('6')">6</button>
+    <button class="op" onclick="press('-')">−</button>
+
+    <button onclick="press('1')">1</button>
+    <button onclick="press('2')">2</button>
+    <button onclick="press('3')">3</button>
+    <button class="op" onclick="press('+')">+</button>
+
+    <button onclick="press('0')">0</button>
+    <button onclick="press('.')">.</button>
+    <button class="eq" onclick="calc()">=</button>
+  </div>
+</div>
+
+<script>
+  let s = document.getElementById('screen');
+  let fresh = true;
+
+  function press(v) {
+    if (fresh) { s.value = ''; fresh = false; }
+    s.value += v;
+  }
+
+  function ac() {
+    s.value = '0';
+    fresh = true;
+  }
+
+  function del() {
+    s.value = s.value.slice(0, -1) || '0';
+  }
+
+  function calc() {
+    try {
+      s.value = eval(s.value.replace('%', '/100'));
+    } catch {
+      s.value = 'Error';
+    }
+    fresh = true;
+  }
+</script>
+</body>
+</html>
